@@ -5,7 +5,8 @@ const {
   getItemById,
   createItem,
   updateItem,
-  deleteItem
+  deleteItem,
+  searchItems
 } = require('../data/items');
 
 /**
@@ -51,9 +52,16 @@ function validatePrice(price) {
 
 /**
  * GET /api/items
- * Retrieve all grocery items
+ * Retrieve all grocery items or search items by name
  */
 router.get('/', (req, res) => {
+  const { search } = req.query;
+  
+  if (search) {
+    const items = searchItems(search);
+    return res.json({ items });
+  }
+  
   const items = getAllItems();
   res.json({ items });
 });

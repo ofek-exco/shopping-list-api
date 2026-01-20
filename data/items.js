@@ -99,11 +99,30 @@ function deleteItem(id) {
   return true;
 }
 
+/**
+ * Search items by name using regex pattern
+ * @param {string} pattern - Regex pattern to search for in item names
+ * @returns {Array} Array of items matching the search pattern
+ */
+function searchItems(pattern) {
+  if (!pattern) {
+    return [];
+  }
+
+  try {
+    const regex = new RegExp(pattern, 'i');
+    return groceryItems.filter(item => regex.test(item.name));
+  } catch (error) {
+    return [];
+  }
+}
+
 module.exports = {
   getAllItems,
   getItemById,
   findItemIndex,
   createItem,
   updateItem,
-  deleteItem
+  deleteItem,
+  searchItems
 };
