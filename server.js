@@ -1,8 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const itemsRouter = require('./routes/items');
 
 const app = express();
 const PORT = 3000;
+
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
